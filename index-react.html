@@ -20,13 +20,22 @@
     import {AmpSize} from './src/amp-react-size.js';
     import {AmpYoutube} from './src/amp-react-youtube.js';
     import {AmpFitText} from './src/amp-react-fit-text.js';
-    window.AmpImg = AmpImg;
-    window.AmpCarousel = AmpCarousel;
-    window.AmpLightbox = AmpLightbox;
-    window.AmpSize = AmpSize;
-    window.AmpYoutube = AmpYoutube;
-    window.AmpFitText = AmpFitText;
+    import {AmpSelector} from './src/amp-react-selector.js';
+    Object.assign(window, {
+      AmpImg,
+      AmpCarousel,
+      AmpLightbox,
+      AmpSize,
+      AmpYoutube,
+      AmpFitText,
+      AmpSelector,
+    });
   </script>
+  <style>
+    li[selected] {
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
@@ -42,6 +51,7 @@ class App extends preact.Component {
   state = {
     slides: [0, 1, 2, 3, 4, 5],
     lightbox1Open: false,
+    selector1Value: '1',
   };
 
   constructor(props) {
@@ -160,6 +170,33 @@ class App extends preact.Component {
         <AmpFitText style={{width: '100%', height: '80px', border: '1px dotted lightgray'}}>
           Can you fit this text?
         </AmpFitText>
+
+        <AmpSelector style={{width: '100%', height: '80px', border: '1px dotted lightgray'}}
+            value={this.state.selector1Value}
+            onChange={event => this.setState({selector1Value: event.target.value})}>
+          <ul>
+            <AmpSelector.Option
+                // TBD: style 1: tagName+content.
+                option="1"
+                tagName="li"
+                >
+              Option 1
+            </AmpSelector.Option>
+            <AmpSelector.Option
+                // TBD: style 2: render-function.
+                option="2"
+                render={props => (
+                  <li {...props}>Option 2</li>
+                )}>
+            </AmpSelector.Option>
+            <AmpSelector.Option
+                option="3"
+                render={props => (
+                  <li {...props}>Option 3</li>
+                )}>
+            </AmpSelector.Option>
+          </ul>
+        </AmpSelector>
 
         <div style={{height: '500vh'}}>scroll down...</div>
         <AmpImg
