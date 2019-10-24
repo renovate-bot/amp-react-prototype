@@ -54,6 +54,7 @@ class App extends preact.Component {
     slides: [0, 1, 2, 3, 4, 5],
     lightbox1Open: false,
     selector1Value: '1',
+    accordion1Expanded: '1',
   };
 
   constructor(props) {
@@ -206,9 +207,8 @@ class App extends preact.Component {
         <AmpAccordion style={{border: '1px dotted lightgray'}}>
           <AmpAccordion.Section
             style={{border: '1px dotted lightpink'}}
-            defaultExpanded
-            //expanded={'1' == this.state.accordion1Expanded}
-            //onExpand={() => this.setState({accordion1Expanded: '1'})}
+            expanded={'1' == this.state.accordion1Expanded}
+            onExpand={() => this.setState({accordion1Expanded: '1'})}
             header={(
               <h3>Section 1</h3>
             )}>
@@ -216,8 +216,8 @@ class App extends preact.Component {
           </AmpAccordion.Section>
           <AmpAccordion.Section
             style={{border: '1px dotted lightpink'}}
-            //expanded={'2' == this.state.accordion1Expanded}
-            //onExpand={() => this.setState({accordion1Expanded: '2'})}
+            expanded={'2' == this.state.accordion1Expanded}
+            onExpand={() => this.setState({accordion1Expanded: '2'})}
             header={(
               <h3>Section 2</h3>
             )}>
@@ -231,8 +231,8 @@ class App extends preact.Component {
           </AmpAccordion.Section>
           <AmpAccordion.Section
             style={{border: '1px dotted lightpink'}}
-            //expanded={'3' == this.state.accordion1Expanded}
-            //onExpand={() => this.setState({accordion1Expanded: '3'})}
+            expanded={'3' == this.state.accordion1Expanded}
+            onExpand={() => this.setState({accordion1Expanded: '3'})}
             disabled
             header={(
               <h3>Section 3</h3>
@@ -240,6 +240,9 @@ class App extends preact.Component {
             <div>Content of section 3</div>
           </AmpAccordion.Section>
         </AmpAccordion>
+        <div>
+          <button onClick={() => this.setState({accordion1Expanded: '2'})}>Expand section 2</button>
+        </div>
 
         <div style={{height: '500vh'}}>scroll down...</div>
         <AmpImg
